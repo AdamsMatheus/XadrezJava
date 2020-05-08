@@ -42,10 +42,22 @@ public class Board {
     }
     public void PlacePiece(Piece piece, Position position)
     {
-
         pieces[position.getRow()][position.getColuns()] = piece;
         piece.pos = position;
     }
+    public Piece removePiece(Position position){
+        if(!PositionExists(position)){
+            throw new BoardException("Erro ao remover");
+        }
+        if(piece(position)== null){
+            return null;
+        }
+        Piece aux = piece(position);
+        aux.pos = null;
+        pieces[position.getRow()][position.getColuns()] = null;
+        return aux;
+    }
+
     private boolean PositionExists(int row, int column){
         return row >= 0 && row < row && column >= 0 && column < columns;
     }
